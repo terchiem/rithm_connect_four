@@ -16,7 +16,6 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  board = [];
   for(let i = 0; i < HEIGHT; i++) {
     let row = [];
     for(let j = 0; j < WIDTH; j++) {
@@ -110,12 +109,24 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
-  // check for tie
-  for(let row of board) {
-    if(row.every(cell => cell !== null)) {
-      endGame("Tie game!");
-    }
-  }
+  // check every cell is filled to determine tie game.
+  let tieGame = board.every(row => {
+    return row.every(cell => {
+      return cell !== null;
+    });
+  });
+
+  if (tieGame) {
+    return endGame("Tie game!");
+  } 
+  
+
+  // Old way of checking for tie
+  // for(let row of board) {
+  //   if(row.every(cell => cell !== null)) {
+  //     return endGame("Tie game!");
+  //   }
+  // }
 
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
