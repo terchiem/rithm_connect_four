@@ -86,7 +86,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -113,10 +113,9 @@ function handleClick(evt) {
   // check for tie
   for(let row of board) {
     if(row.every(cell => cell !== null)) {
-      endGame();
+      endGame("Tie game!");
     }
   }
-
 
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
@@ -140,8 +139,9 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  // Loops through each cell on the board.
+  // Uses the _win function to check if there are four adjacent cells 
+  // that fulfill win conditions. 
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
